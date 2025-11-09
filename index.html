@@ -1,0 +1,336 @@
+    <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Eya Zoghlami</title>
+  <meta name="description" content="Portfolio d'Eya Zoghlami — Étudiante en Business Computing passionnée par le développement web et la performance sportive." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1221;         /* fond */
+      --card:#161a2f;       /* cartes */
+      --muted:#8b90a5;      /* texte secondaire */
+      --text:#e7eaf6;       /* texte principal */
+      --brand:#7c5cff;      /* couleur marque */
+      --brand-2:#4ad6ff;    /* dégradé */
+      --ok:#2ecc71;
+      --chip:#222746;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:radial-gradient(1200px 600px at 80% -10%, #1b1f39 0%, transparent 60%),
+               radial-gradient(800px 400px at 10% 0%, #172044 0%, transparent 60%), var(--bg);
+               color:var(--text); font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,sans-serif; scroll-behavior:smooth}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%; display:block}
+
+    /* NAVBAR */
+    .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(12px);
+         background:linear-gradient(180deg, rgba(15,18,33,.9), rgba(15,18,33,.6)); border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{max-width:1150px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:14px 20px}
+    .brand{font-weight:700; letter-spacing:.2px}
+    .brand span{background:linear-gradient(135deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .nav ul{list-style:none; display:flex; gap:20px; margin:0; padding:0}
+    .nav a.link{opacity:.85; padding:8px 12px; border-radius:10px; transition:all .2s ease}
+    .nav a.link:hover,.nav a.link.active{background:rgba(124,92,255,.12); opacity:1}
+    .cta{padding:10px 14px; background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#0a0d1a; font-weight:600; border-radius:12px; box-shadow:var(--shadow);}
+
+    /* LAYOUT */
+    .wrap{max-width:1150px;margin:auto;padding:70px 20px}
+
+    /* HERO */
+    .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center}
+    .hero h1{font-size:clamp(28px,3.5vw,44px); line-height:1.1; margin:0 0 12px}
+    .gradient{background:linear-gradient(135deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .hero p{color:var(--muted); margin:0 0 22px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0}
+    .badge{background:var(--chip); color:#cfd3ff; padding:6px 10px; border-radius:999px; font-size:13px; border:1px solid rgba(255,255,255,.06)}
+    .hero-card{background:linear-gradient(180deg,#1a1f3d,#121630); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:18px; box-shadow:var(--shadow)}
+    .avatar{aspect-ratio:4/5; border-radius:14px; overflow:hidden; position:relative; background:#0c1026; border:1px solid rgba(255,255,255,.08)}
+    .avatar::after{content:""; position:absolute; inset:0; background:radial-gradient(500px 220px at 70% 0%, rgba(124,92,255,.25), transparent 60%)}
+
+    /* SECTIONS */
+    section{margin-top:70px}
+    h2{font-size:clamp(22px,2.5vw,30px); margin:0 0 14px}
+    .sub{color:var(--muted); margin:0 0 18px}
+
+    /* GRID CARDS */
+    .grid{display:grid; gap:16px}
+    .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width: 900px){.hero{grid-template-columns:1fr}.grid.cols-3{grid-template-columns:1fr 1fr}.grid.cols-2{grid-template-columns:1fr}}
+    @media (max-width: 640px){.grid.cols-3{grid-template-columns:1fr}}
+
+    .card{background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:18px; box-shadow:var(--shadow)}
+    .row{display:flex; gap:12px; align-items:center}
+
+    /* TIMELINE */
+    .timeline{position:relative; padding-left:18px}
+    .timeline::before{content:""; position:absolute; left:6px; top:0; bottom:0; width:2px; background:linear-gradient(var(--brand), transparent)}
+    .t-item{position:relative; margin:0 0 18px; padding-left:12px}
+    .t-item::before{content:""; position:absolute; left:-12px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--brand)}
+
+    /* SKILLS */
+    .chips{display:flex; flex-wrap:wrap; gap:10px}
+    .chip{background:var(--chip); border:1px solid rgba(255,255,255,.06); padding:8px 12px; border-radius:999px; font-size:14px}
+    .progress{height:9px; background:#1a1f3a; border-radius:999px; overflow:hidden; border:1px solid rgba(255,255,255,.08)}
+    .bar{height:100%; background:linear-gradient(90deg,var(--brand),var(--brand-2))}
+
+    /* FOOTER */
+    footer{border-top:1px solid rgba(255,255,255,.08); padding:30px 20px; text-align:center; color:var(--muted)}
+
+    /* BUTTONS */
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.1); background:#1a1f3a; color:#e8ebff; cursor:pointer}
+    .btn:hover{transform:translateY(-1px)}
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">Eya <span>Zoghlami</span></div>
+      <ul>
+        <li><a class="link" href="#about">À propos</a></li>
+        <li><a class="link" href="#skills">Compétences</a></li>
+        <li><a class="link" href="#projects">Projets</a></li>
+        <li><a class="link" href="#experience">Expériences</a></li>
+        <li><a class="link" href="#education">Formations</a></li>
+        <li><a class="link" href="#contact">Contact</a></li>
+        <li><a class="cta" href="Eya%20Zoghlami.pdf" download>Télécharger le CV</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="wrap hero" id="home">
+    <div>
+      <h1>Étudiante en <span class="gradient">Business Computing</span> & passionnée de <span class="gradient">développement web</span></h1>
+      <p>Je m'appelle <strong>Eya Zoghlami</strong> — motivée, curieuse, et orientée résultat. Mon objectif : allier technologie et performance sportive pour créer des expériences numériques utiles et accessibles.</p>
+      <div class="badges">
+        <span class="badge">Tunis, Tunisie</span>
+        <span class="badge">Disponible pour stage</span>
+        <span class="badge">HTML • CSS • JavaScript • PHP • SQL</span>
+      </div>
+      <div class="row">
+        <a class="btn" href="#projects">Voir mes projets</a>
+        <a class="btn" href="#contact">Me contacter</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="avatar">
+        <!-- Remplace l'image ci-dessous par ta photo pro (même dossier) -->
+        <img src="ChatGPT Image Nov 9, 2025, 02_17_58 AM.png" alt="Portrait d'Eya Zoghlami" style="object-fit:cover; width:100%; height:100%" />
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px">
+        <div class="card">
+          <div class="sub" style="margin:0">Email</div>
+          <div><a href="mailto:eyazoghlami12@gmail.com">eyazoghlami12@gmail.com</a></div>
+        </div>
+        <div class="card">
+          <div class="sub" style="margin:0">Téléphone</div>
+          <div><a href="tel:+21625881360">+216 25 881 360</a></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- À PROPOS -->
+    <section id="about">
+      <h2>À propos</h2>
+      <p class="sub">Étudiante en Licence 3 Business Computing (Esprit School of Business), je souhaite renforcer mes compétences en développement web tout en explorant l'application du numérique dans le domaine sportif.</p>
+      <div class="grid cols-3">
+        <div class="card">
+          <div class="row" style="justify-content:space-between">
+            <strong>Profil</strong>
+            <span class="badge">Motivée</span>
+          </div>
+          <p style="color:var(--muted)">Esprit d’analyse, organisation, curiosité, et travail en équipe multiculturelle.</p>
+        </div>
+        <div class="card">
+          <strong>Objectif</strong>
+          <p style="color:var(--muted)">Contribuer à des projets web concrets, centrés utilisateur, avec un fort impact.</p>
+        </div>
+        <div class="card">
+          <strong>Centres d’intérêt</strong>
+          <p style="color:var(--muted)">Natation • Lecture • Sport • Veille technologique</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPÉTENCES -->
+    <section id="skills">
+      <h2>Compétences</h2>
+      <p class="sub">Un mix de techniques web et d’outils data/BI.</p>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3 style="margin-top:0">Développement Web</h3>
+          <div class="chips" style="margin-bottom:14px">
+            <span class="chip">HTML5</span>
+            <span class="chip">CSS3</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">PHP</span>
+            <span class="chip">SQL</span>
+          </div>
+          <div class="row" style="justify-content:space-between"><span>Front-end</span><span>Intermédiaire</span></div>
+          <div class="progress"><div class="bar" style="width:75%"></div></div>
+          <div class="row" style="justify-content:space-between; margin-top:8px"><span>Back-end</span><span>Débutant+</span></div>
+          <div class="progress"><div class="bar" style="width:55%"></div></div>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Data & Outils</h3>
+          <div class="chips" style="margin-bottom:14px">
+            <span class="chip">Power BI</span>
+            <span class="chip">Excel</span>
+            <span class="chip">Python</span>
+            <span class="chip">Word</span>
+            <span class="chip">PowerPoint</span>
+          </div>
+          <div class="row" style="justify-content:space-between"><span>Data Viz</span><span>Intermédiaire</span></div>
+          <div class="progress"><div class="bar" style="width:65%"></div></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <div class="chips">
+          <span class="chip">Français — B2</span>
+          <span class="chip">Anglais — B2</span>
+          <span class="chip">Travail d’équipe</span>
+          <span class="chip">Organisation</span>
+          <span class="chip">Autonomie</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETS -->
+    <section id="projects">
+      <h2>Projets</h2>
+      <p class="sub">Quelques travaux académiques et personnels.</p>
+      <div class="grid cols-3">
+        <article class="card">
+          <h3 style="margin:0 0 6px">Site Web Responsive</h3>
+          <p style="color:var(--muted); margin:0 0 12px">HTML/CSS/JS/PHP + MySQL — site vitrine dynamique.</p>
+          <div class="row" style="justify-content:space-between">
+            <span class="badge">Front + Back</span>
+            <a class="btn" href="#" onclick="alert('Ajoute ton lien GitHub ou un zip ici.'); return false;">Voir</a>
+          </div>
+        </article>
+        <article class="card">
+          <h3 style="margin:0 0 6px">Tableau de bord Power BI</h3>
+          <p style="color:var(--muted); margin:0 0 12px">Visualisation des ventes, mesures et filtres interactifs.</p>
+          <div class="row" style="justify-content:space-between">
+            <span class="badge">Data Viz</span>
+            <a class="btn" href="#" onclick="alert('Ajoute un export PDF ou lien vers Power BI Service.'); return false;">Voir</a>
+          </div>
+        </article>
+        <article class="card">
+          <h3 style="margin:0 0 6px">Développement Durable (Python)</h3>
+          <p style="color:var(--muted); margin:0 0 12px">Analyse d’impact écologique et graphiques interactifs.</p>
+          <div class="row" style="justify-content:space-between">
+            <span class="badge">Python</span>
+            <a class="btn" href="#" onclick="alert('Ajoute le notebook ou le repo ici.'); return false;">Voir</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- EXPÉRIENCES -->
+    <section id="experience">
+      <h2>Expériences</h2>
+      <div class="card timeline">
+        <div class="t-item">
+          <h3 style="margin:0">Coach de Natation — Piscine, Tunis</h3>
+          <div class="sub">Encadrement de nageurs, élaboration de programmes, suivi des performances.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMATIONS -->
+    <section id="education">
+      <h2>Formations</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3 style="margin:0">Licence — Business Information System</h3>
+          <div class="sub">Esprit School of Business, Tunis (2023 – 2026)</div>
+        </div>
+        <div class="card">
+          <h3 style="margin:0">Baccalauréat — Sciences Économiques</h3>
+          <div class="sub">Lycée secondaire de Tunis (2019 – 2023)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="sub">Discutons d’un projet ou d’une opportunité de stage.</p>
+      <div class="grid cols-2">
+        <form class="card" id="contactForm" onsubmit="sendMessage(event)">
+          <div class="row" style="gap:12px">
+            <div style="flex:1">
+              <label for="name">Nom</label>
+              <input id="name" name="name" required placeholder="Votre nom" class="input" />
+            </div>
+            <div style="flex:1">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="vous@email.com" class="input" />
+            </div>
+          </div>
+          <div style="margin-top:12px">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Votre message" class="input"></textarea>
+          </div>
+          <button class="btn" type="submit" style="margin-top:12px">Envoyer</button>
+          <p id="formStatus" class="sub" style="display:none; margin-top:12px"></p>
+        </form>
+        <div class="card">
+          <h3 style="margin-top:0">Coordonnées</h3>
+          <p style="color:var(--muted)">Je réponds rapidement par email et WhatsApp.</p>
+          <p><strong>Email :</strong> <a href="mailto:eyazoghlami12@gmail.com">eyazoghlami12@gmail.com</a></p>
+          <p><strong>Téléphone :</strong> <a href="tel:+21625881360">+216 25 881 360</a></p>
+          <p><strong>Localisation :</strong> Tunis, Tunisie</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Eya Zoghlami — Fait avec HTML • CSS • JavaScript
+  </footer>
+
+  <style>
+    /* Inputs (scopé ici pour éviter d’alourdir en haut) */
+    label{display:block; font-size:14px; color:#c7cbdf; margin-bottom:6px}
+    .input{width:100%; background:#11152b; border:1px solid rgba(255,255,255,.08); color:#e9ecff; border-radius:12px; padding:10px 12px; outline:none}
+    .input:focus{border-color:#7c5cff}
+  </style>
+
+  <script>
+    // Active link on scroll
+    const links=[...document.querySelectorAll('.nav a.link')]
+    const ids=links.map(a=>document.querySelector(a.getAttribute('href')))
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        const i=ids.indexOf(e.target)
+        if(e.isIntersecting){ links.forEach(l=>l.classList.remove('active')); if(links[i]) links[i].classList.add('active') }
+      })
+    },{threshold:.25})
+    ids.forEach(sec=>sec && io.observe(sec))
+
+    // Footer year
+    document.getElementById('year').textContent=new Date().getFullYear()
+
+    // Fake form send (frontend only)
+    function sendMessage(ev){
+      ev.preventDefault()
+      const status=document.getElementById('formStatus')
+      status.style.display='block'
+      status.textContent='Merci ! Votre message a été simulé côté front-end.'
+      ev.target.reset()
+    }
+  </script>
+</body>
+</html>
